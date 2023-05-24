@@ -64,9 +64,9 @@ const MemeList = () => {
 
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-white">Random Gifs</h2>
+    <div className="flex flex-col justify-items-center items-center gap-7 py-4 bg-gradient-to-t from-gray-400 to-gray-600 h-full">
+  <div className="flex justify-between mb-4">
+      <h2 className="text-2xl font-bold text-white">Most Popular</h2>
         <button
           className="text-white font-bold py-3 px-6 ml-auto hover:-rotate-90 hover:scale-110 transition-all duration-300"
           onClick={handleRefresh}
