@@ -44,23 +44,19 @@ const MemeList = () => {
     try {
       const memeToUpdate = memes.find((meme) => meme._id === memeId);
       await axios.put(`${BASE_URL}/${memeId}`, { title: memeToUpdate.title });
-      // Si la solicitud PUT tiene éxito, podrías mostrar un mensaje de éxito o realizar otra acción necesaria.
       setEditableMemeId('');
     } catch (error) {
       console.error(error);
-      // Si la solicitud PUT falla, podrías mostrar un mensaje de error o realizar otra acción necesaria.
     }
   };
 
   const handleDelete = async (memeId) => {
     try {
       await axios.delete(`${BASE_URL}/${memeId}`);
-      // Si la solicitud DELETE tiene éxito, podrías mostrar un mensaje de éxito o realizar otra acción necesaria.
       const updatedMemes = memes.filter((meme) => meme._id !== memeId);
       setMemes(updatedMemes);
     } catch (error) {
       console.error(error);
-      // Si la solicitud DELETE falla, podrías mostrar un mensaje de error o realizar otra acción necesaria.
     }
   };
 

@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import { UserContext } from '../Context/UserContext/UserContext';
+import { useNavigate } from 'react-router-dom';
+
+const BASE_URL = "http://localhost:4000/meme";
 
 export const UploadPage = () => {
     const [file, setFile] = useState(null);
     const [url, setUrl] = useState('');
+    const { user } = useContext(UserContext);
+    const token = user ? user.token : '';
+    const navigate = useNavigate();
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -16,17 +23,27 @@ export const UploadPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             if (file) {
                 const formData = new FormData();
                 formData.append('image', file);
-
-                await axios.post('http://localhost:4000/upload', formData);
-            } else if (url) {
-                await axios.post('http://localhost:4000/upload', { image: url });
+                await axios.post(`${BASE_URL}/addlocal`, formData, {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                });
             }
-
+            if (url) {
+                await axios.post(
+                    `${BASE_URL}/addfromurl`,
+                    { url: url },
+                    {
+                        headers: {
+                            Authorization: `${token}`,
+                        },
+                    }
+                );
+            }
             setFile(null);
             setUrl('');
         } catch (error) {
@@ -70,6 +87,7 @@ export const UploadPage = () => {
                             type="text"
                             value={url}
                             onChange={handleUrlChange}
+                            name="url"
                             placeholder="Enter URL"
                             className="mb-4 p-3 border border-gray-500 rounded-md w-full bg-gray-800 text-gray-300"
                         />
@@ -82,12 +100,15 @@ export const UploadPage = () => {
                     >
                         Upload
                     </button>
+                    <button
+                        type="button"
+                        className="px-6 py-3 bg-red-500 text-white rounded-md shadow-lg mt-4 ml-4"
+                        onClick={() => navigate('/dashboard')}
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </form>
     );
 };
-
-
-
-
