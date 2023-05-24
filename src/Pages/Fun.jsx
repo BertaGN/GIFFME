@@ -3,22 +3,22 @@ import axios from 'axios';
 import { SlRefresh } from "react-icons/sl";
 import { Navbar } from '../Components/Navbar';
 
-const BASE_URL = "http://localhost:4000/catsgifs";
+const BASE_URL = "http://localhost:4000/fungifs";
 
-export const CatsGifs = () => {
-  const [cats, setCats] = useState([]);
+export const FunGifs = () => {
+  const [Fun, setFun] = useState([]);
   const [refreshIndex, setRefreshIndex] = useState(0);
 
   useEffect(() => {
-    fetchCatsMemes();
+    fetchFunMemes();
   }, [refreshIndex]);
 
-  const fetchCatsMemes = async () => {
+  const fetchFunMemes = async () => {
     try {
       const response = await axios.get(`${BASE_URL}`);
       const data = response.data;
-      if (data && data.catGif) {
-        setCats(data.catGif.slice(refreshIndex, refreshIndex + 20));
+      if (data && data.fun) {
+        setFun(data.fun.slice(refreshIndex, refreshIndex + 20));
       }
     } catch (error) {
       console.error(error);
@@ -33,7 +33,7 @@ export const CatsGifs = () => {
     <div className="flex flex-col justify-items-center items-center gap-7 py-4 bg-gradient-to-t from-gray-400 to-gray-600 h-full">
       <Navbar/>
     <div className="flex justify-between mb-4">
-        <h2 className="text-2xl font-bold text-white">Cats</h2>
+        <h2 className="text-2xl font-bold text-white">Fun</h2>
         <button
           className="text-white font-bold py-3 px-6 ml-auto hover:-rotate-90 hover:scale-110 transition-all duration-300"
           onClick={handleRefresh}
@@ -43,13 +43,13 @@ export const CatsGifs = () => {
       </div>
     
     <div className="flex flex-wrap">
-      {cats.length ? cats.map((cat) => (
-        <div key={cat._id} className="w-1/4 p-4">
+      {Fun.length ? Fun.map((fun) => (
+        <div key={fun._id} className="w-1/4 p-4">
           <div className="border-4 border-white hover:scale-105 transition-all duration-300">
-          <h3 className="text-xl font-bold mb-2">{cat.title}</h3>
+          <h3 className="text-xl font-bold mb-2">{fun.title}</h3>
             <img
-              src={cat.url}
-              alt="cat"
+              src={fun.url}
+              alt="fun"
               className="w-full p-4"
             />
           </div>
@@ -61,6 +61,4 @@ export const CatsGifs = () => {
 };
 
 
-export default CatsGifs;
-
-//no tinc errors pero no s'em mostren a la pantalla
+export default FunGifs;
