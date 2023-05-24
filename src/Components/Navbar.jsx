@@ -1,6 +1,6 @@
 import React from 'react'
 import Search from './Search';
-
+import { BsUpload } from "react-icons/bs";
 export const Navbar = () => {
     return (
         <nav className="bg-gray-800 w-full">
@@ -15,7 +15,9 @@ export const Navbar = () => {
                             <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Entertainment</a>
                             <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cats</a>
                             <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Memes</a>
-                            <a href="/uploadpage" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Upload</a>
+                            <a href="/uploadpage" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                <BsUpload/>
+                            </a>
                         </div>
                     </div>
                 </div>

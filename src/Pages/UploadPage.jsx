@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { TiTickOutline } from "react-icons/ti";
+import { AiOutlineClose} from "react-icons/ai";
+
 
 const BASE_URL = "http://localhost:4000/meme";
 
@@ -98,14 +101,14 @@ export const UploadPage = () => {
                         type="submit"
                         className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-md shadow-lg mt-4"
                     >
-                        Upload
+                       <TiTickOutline/>
                     </button>
                     <button
                         type="button"
                         className="px-6 py-3 bg-red-500 text-white rounded-md shadow-lg mt-4 ml-4"
                         onClick={() => navigate('/dashboard')}
                     >
-                        Close
+                        <AiOutlineClose/>
                     </button>
                 </div>
             </div>

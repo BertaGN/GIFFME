@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { SlRefresh } from "react-icons/sl";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { TiTickOutline } from "react-icons/ti";
 
 const BASE_URL = "http://localhost:4000/meme";
 
@@ -15,7 +18,6 @@ const MemeList = () => {
   const fetchMemes = async () => {
     try {
       const response = await axios.get(`${BASE_URL}`);
-      console.log(response);
       setMemes(response.data.memes.slice(refreshIndex, refreshIndex + 20));
     } catch (error) {
       console.error(error);
@@ -66,10 +68,10 @@ const MemeList = () => {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-white">Random Gifs</h2>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-auto"
+          className="text-white font-bold py-3 px-6 ml-auto hover:-rotate-90 hover:scale-110 transition-all duration-300"
           onClick={handleRefresh}
         >
-          Refresh
+          <SlRefresh />
         </button>
       </div>
 
@@ -84,9 +86,13 @@ const MemeList = () => {
                       <input
                         type="text"
                         value={meme.title}
-                        onChange={(event) => handleTitleChange(event, meme._id)}
+                        onChange={(event) =>
+                          handleTitleChange(event, meme._id)
+                        }
                       />
-                      <button onClick={() => handleTitleSubmit(meme._id)}>Save</button>
+                      <button onClick={() => handleTitleSubmit(meme._id)}>
+                        <TiTickOutline />
+                      </button>
                     </>
                   ) : (
                     <>
@@ -95,14 +101,20 @@ const MemeList = () => {
                   )}
                 </h3>
                 <img src={meme.url} alt="Meme" className="w-full p-4" />
-                <button
-                  className="ml-2"
-                  onClick={() => handleEditClick(meme._id)}
-                >
-                  Editar
-                </button>
-                <button className="mt-2 hover:bg-red-700 text-white font-bold py-2 px-4"
-                  onClick={() => handleDelete(meme._id)}>Borrar</button>
+                <div className="flex justify-center">
+                  <button
+                    className="font-bold hover:text-white"
+                    onClick={() => handleEditClick(meme._id)}
+                  >
+                    <AiOutlineEdit />
+                  </button>
+                  <button
+                    className="font-bold hover:text-white py-2 px-4"
+                    onClick={() => handleDelete(meme._id)}
+                  >
+                    <AiOutlineDelete />
+                  </button>
+                </div>
               </div>
             </div>
           ))
