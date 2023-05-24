@@ -65,8 +65,8 @@ const MemeList = () => {
 
   return (
     <div className="flex flex-col justify-items-center items-center gap-7 py-4 bg-gradient-to-t from-gray-400 to-gray-600 h-full">
-  <div className="flex justify-between mb-4">
-      <h2 className="text-2xl font-bold text-white">Most Popular</h2>
+      <div className="flex justify-between mb-4">
+        <h2 className="text-2xl font-bold text-white">Most Popular</h2>
         <button
           className="text-white font-bold py-3 px-6 ml-auto hover:-rotate-90 hover:scale-110 transition-all duration-300"
           onClick={handleRefresh}
@@ -79,7 +79,7 @@ const MemeList = () => {
         {memes.length ? (
           memes.map((meme) => (
             <div key={meme._id} className="w-1/4 p-4">
-              <div className="border-4 border-white hover:scale-105 transition-all duration-300">
+              <div className="border-4 border-white hover:border-gradient-pink hover:scale-105 transition-all duration-300">
                 <h3 className="text-xl font-bold mb-2">
                   {editableMemeId === meme._id ? (
                     <>
@@ -96,22 +96,16 @@ const MemeList = () => {
                     </>
                   ) : (
                     <>
-                      <span>{meme.title}</span>
+                      <span className="text-gray-800 ">{meme.title}</span>
                     </>
                   )}
                 </h3>
                 <img src={meme.url} alt="Meme" className="w-full p-4" />
                 <div className="flex justify-center">
-                  <button
-                    className="font-bold hover:text-white"
-                    onClick={() => handleEditClick(meme._id)}
-                  >
+                  <button className="font-bold hover:text-gray-500" onClick={() => handleEditClick(meme._id)}>
                     <AiOutlineEdit />
                   </button>
-                  <button
-                    className="font-bold hover:text-white py-2 px-4"
-                    onClick={() => handleDelete(meme._id)}
-                  >
+                  <button className="font-bold hover:text-gray-500 py-2 px-4" onClick={() => handleDelete(meme._id)}>
                     <AiOutlineDelete />
                   </button>
                 </div>

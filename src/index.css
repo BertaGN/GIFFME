@@ -26,3 +26,10 @@
 body {
     overflow-x: hidden;
   }
+
+
+  @layer utilities {
+    .border-gradient-pink {
+      background-image: linear-gradient(to right, #F8F8FF, #FFEBEB);
+    }
+  }

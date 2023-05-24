@@ -41,7 +41,7 @@ export const CatsGifs = () => {
       if (cat._id === catId) {
         return { ...cat, title: event.target.value };
       }
-      return meme;
+      return cat;
     });
     setCats(updatedCats);
   };
@@ -81,7 +81,7 @@ export const CatsGifs = () => {
       <div className="flex flex-wrap">
         {cats.length ? cats.map((cat) => (
           <div key={cat._id} className="w-1/4 p-4">
-            <div className="border-4 border-white hover:scale-105 transition-all duration-300">
+            <div className="border-4 border-white hover:border-gradient-pink hover:scale-105 transition-all duration-300">
               <h3 className="text-xl font-bold mb-2">
                 {editableCatId === cat._id ? (
                   <>
@@ -109,13 +109,13 @@ export const CatsGifs = () => {
               />
               <div className="flex justify-center">
                 <button
-                  className="font-bold hover:text-white"
+                  className="font-bold hover:text-gray-500"
                   onClick={() => handleEditClick(cat._id)}
                 >
                   <AiOutlineEdit />
                 </button>
                 <button
-                  className="font-bold hover:text-white py-2 px-4"
+                  className="font-bold hover:text-gray-500 py-2 px-4"
                   onClick={() => handleDelete(cat._id)}
                 >
                   <AiOutlineDelete />
