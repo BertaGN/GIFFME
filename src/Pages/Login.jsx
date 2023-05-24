@@ -15,7 +15,6 @@ export const Login = () => {
     if (email && password ) {
       login(email);
       console.log('Login successful');
-      navigate('/dashboard');
     } else {
       console.log('Invalid email or password');
     }

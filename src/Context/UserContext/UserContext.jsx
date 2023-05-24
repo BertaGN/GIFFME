@@ -2,10 +2,13 @@ import React, { createContext, useContext, useState } from 'react';
 
 export const UserContext = createContext();
 
-export const useUser = () => useContext(UserContext);
+export const useUser = () => {
+    const state = useContext(UserContext);
+    return state;
+}
 
 export const UserProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [email, setEmail] = useState(localStorage.getItem('email') || '');
 
     const login = (email) => {
@@ -23,14 +26,14 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider 
-        value={{ 
-            isLoggedIn, 
-            email, 
-            login, 
-            logout 
+        <UserContext.Provider
+            value={{
+                isLoggedIn,
+                email,
+                login,
+                logout
             }}
-            >
+        >
             {children}
         </UserContext.Provider>
     );
