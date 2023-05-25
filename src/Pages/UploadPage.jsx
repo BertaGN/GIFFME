@@ -9,46 +9,40 @@ import { AiOutlineClose } from "react-icons/ai";
 const BASE_URL = "http://localhost:4000/meme";
 
 export const UploadPage = () => {
-    const [file, setFile] = useState(null);
-    const [url, setUrl] = useState('');
+    const [uploadFormData, setUploadFormData] = useState({
+        title: "",
+        url: "",
+        tag: ""
+    })
     const { user } = useContext(UserContext);
     const token = user ? user.token : '';
     const navigate = useNavigate();
 
-    const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-        setFile(selectedFile);
-    };
 
-    const handleUrlChange = (e) => {
-        setUrl(e.target.value);
+    const handleFormChange = (e) => {
+        setUploadFormData({ ...uploadFormData, [e.target.name]: e.target.value })
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (file) {
-                const formData = new FormData();
-                formData.append('image', file);
-                await axios.post(`${BASE_URL}/addlocal`, formData, {
+            console.log(uploadFormData)
+            await axios.post(
+                `${BASE_URL}/addfromurl`,
+                { ...uploadFormData },
+                {
                     headers: {
                         Authorization: `${token}`,
                     },
-                });
-            }
-            if (url) {
-                await axios.post(
-                    `${BASE_URL}/addfromurl`,
-                    { url: url },
-                    {
-                        headers: {
-                            Authorization: `${token}`,
-                        },
-                    }
-                );
-            }
-            setFile(null);
-            setUrl('');
+                }
+            );
+
+            setUploadFormData({
+                title: "",
+                url: "",
+                tag: ""
+            })
+
         } catch (error) {
             console.error(error);
         }
@@ -62,10 +56,26 @@ export const UploadPage = () => {
                     <div className="border border-gray-600 rounded-lg p-6">
                         <input
                             type="text"
-                            value={url}
-                            onChange={handleUrlChange}
+                            value={uploadFormData.url}
+                            onChange={handleFormChange}
                             name="url"
                             placeholder="Enter URL"
+                            className="mb-4 p-3 border border-gray-500 rounded-md w-full lg:w-96 bg-gray-800 text-gray-300"
+                        />
+                        <input
+                            type="text"
+                            value={uploadFormData.title}
+                            onChange={handleFormChange}
+                            name="title"
+                            placeholder="Enter Title"
+                            className="mb-4 p-3 border border-gray-500 rounded-md w-full lg:w-96 bg-gray-800 text-gray-300"
+                        />
+                        <input
+                            type="text"
+                            value={uploadFormData.tag}
+                            onChange={handleFormChange}
+                            name="tag"
+                            placeholder="Enter tag"
                             className="mb-4 p-3 border border-gray-500 rounded-md w-full lg:w-96 bg-gray-800 text-gray-300"
                         />
                     </div>
