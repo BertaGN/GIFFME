@@ -26,7 +26,6 @@ export const UploadPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(uploadFormData)
             await axios.post(
                 `${BASE_URL}/addfromurl`,
                 { ...uploadFormData },

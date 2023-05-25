@@ -21,7 +21,7 @@ export const CatsGifs = () => {
       const response = await axios.get(`${BASE_URL}`);
       const data = response.data;
       if (data && data.catGif) {
-        setCats(data.catGif.slice(refreshIndex, refreshIndex + 20));
+        setCats(data.catGif.slice(refreshIndex, refreshIndex + 40));
       }
     } catch (error) {
       console.error(error);
@@ -29,7 +29,7 @@ export const CatsGifs = () => {
   };
 
   const handleRefresh = () => {
-    setRefreshIndex(refreshIndex + 20);
+    setRefreshIndex(refreshIndex + 40);
   };
 
   const handleEditClick = (catId) => {

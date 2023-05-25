@@ -18,14 +18,14 @@ const MemeList = () => {
   const fetchMemes = async () => {
     try {
       const response = await axios.get(`${BASE_URL}`);
-      setMemes(response.data.memes.slice(refreshIndex, refreshIndex + 20));
+      setMemes(response.data.memes.slice(refreshIndex, refreshIndex + 40));
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleRefresh = () => {
-    setRefreshIndex(refreshIndex + 20);
+    setRefreshIndex(refreshIndex + 40);
   };
 
   const handleEditClick = (memeId) => {

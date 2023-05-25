@@ -21,7 +21,7 @@ export const FunGifs = () => {
       const response = await axios.get(`${BASE_URL}`);
       const data = response.data;
       if (data && data.fun) {
-        setFun(data.fun.slice(refreshIndex, refreshIndex + 20));
+        setFun(data.fun.slice(refreshIndex, refreshIndex + 40));
       }
     } catch (error) {
       console.error(error);
@@ -29,7 +29,7 @@ export const FunGifs = () => {
   };
 
   const handleRefresh = () => {
-    setRefreshIndex(refreshIndex + 20);
+    setRefreshIndex(refreshIndex + 40);
   };
 
   const handleEditClick = (funId) => {
